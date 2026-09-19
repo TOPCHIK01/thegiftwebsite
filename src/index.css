@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+@theme {
+  --color-milk: #fdfaf7;
+  --color-cream: #f7efe8;
+  --color-blush: #f3d9de;
+  --color-rose: #e5b8c4;
+  --color-rose-deep: #d99cae;
+  --color-powder: #e9d3d8;
+  --color-bordeaux: #7d3044;
+  --color-bordeaux-deep: #5f2434;
+  --color-gold: #cfa46f;
+  --color-gold-light: #e8c795;
+  --color-ink: #4a3540;
+
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Убирает задержку двойного тапа и pinch-zoom на кнопках */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Fallback для браузеров без dvh (старый iOS Safari) */
+@supports not (height: 100dvh) {
+  .min-h-dvh {
+    min-height: 100vh;
+  }
+}
+
+body {
+  background-color: var(--color-milk);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(229, 184, 196, 0.55);
+}
+
+/* ---------- Gift box ---------- */
+
+.gift-box {
+  position: relative;
+  width: min(58vmin, 250px);
+  aspect-ratio: 1;
+}
+
+.gift-box--mini {
+  width: min(30vmin, 130px);
+}
+
+.gift-aura {
+  position: absolute;
+  inset: -22%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(232, 199, 149, 0.4) 0%,
+    rgba(243, 217, 222, 0.28) 42%,
+    transparent 70%
+  );
+  animation: aura-pulse 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.gift-shadow {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -5%;
+  height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(125, 48, 68, 0.28), transparent 70%);
+  filter: blur(2px);
+}
+
+.gift-body {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 4%;
+  height: 58%;
+  border-radius: 9% / 13%;
+  background: linear-gradient(165deg, #f5dde3 0%, #eab9c6 52%, #dda4b6 100%);
+  box-shadow:
+    inset 0 -14px 26px rgba(125, 48, 68, 0.16),
+    inset 0 6px 12px rgba(255, 255, 255, 0.35),
+    0 22px 44px -16px rgba(125, 48, 68, 0.35);
+}
+
+.gift-ribbon {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #bd8c4f 0%, #eac78f 45%, #cfa46f 100%);
+  box-shadow:
+    inset 2px 0 3px rgba(255, 255, 255, 0.35),
+    inset -2px 0 3px rgba(125, 48, 68, 0.15);
+}
+
+.gift-lid {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 26%;
+  height: 22%;
+  border-radius: 16% / 46%;
+  background: linear-gradient(165deg, #f9e8ec 0%, #f0c9d3 60%, #e7b3c1 100%);
+  box-shadow:
+    inset 0 4px 8px rgba(255, 255, 255, 0.5),
+    0 12px 26px -10px rgba(125, 48, 68, 0.45);
+  z-index: 2;
+}
+
+.gift-lid-ribbon {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 15.6%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #bd8c4f 0%, #eac78f 45%, #cfa46f 100%);
+  box-shadow:
+    inset 2px 0 3px rgba(255, 255, 255, 0.35),
+    inset -2px 0 3px rgba(125, 48, 68, 0.15);
+}
+
+.gift-bow {
+  position: absolute;
+  left: 50%;
+  bottom: 52%;
+  width: 62%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 4px 6px rgba(125, 48, 68, 0.3));
+}
+
+.gift-sparkle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, rgba(232, 199, 149, 0.9) 55%, transparent 75%);
+  box-shadow: 0 0 8px 2px rgba(232, 199, 149, 0.55);
+  animation: twinkle 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes gift-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.3deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(1.3deg);
+  }
+}
+
+@keyframes aura-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.07);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(16px, -26px);
+  }
+}
+
+@keyframes hint-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-gift-float {
+  animation: gift-float 4.6s ease-in-out infinite;
+}
+
+.animate-hint-pulse {
+  animation: hint-pulse 2.6s ease-in-out infinite;
+}
+
+.bokeh {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(34px);
+  animation: drift 11s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gift-float,
+  .gift-aura,
+  .gift-sparkle,
+  .bokeh,
+  .animate-hint-pulse {
+    animation: none !important;
+  }
+
+  .gift-sparkle {
+    opacity: 0.4;
+  }
+}
